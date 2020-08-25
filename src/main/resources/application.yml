@@ -1,40 +1,64 @@
-server:
-  port: 8765
+#server:
+#  port: 8765
+#
+#spring:
+#  application:
+#    name: zuul-server
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://edueureka.herokuapp.com/eureka/
+#    fetch-registry: true
+#
+#management:
+#  security:
+#    enabled: false
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 190000 # Fuse service request timeout
+#
+#ribbon:
+#  ReadTimeout: 30000 # Timeout of request processing after connection is established 
+#  ConnectTimeout: 15000 # Time-out for connection establishment
+#  MaxAutoRetries: 1 # Number of retries for the current instance
+#  MaxAutoRetriesNextServer: 1 # Number of retries for switching instances
+#      
+#zuul:
+#  host:
+#    connect-timeout-millis: 30000
+#    socket-timeout-millis: 30000 #  sensitiveHeaders:
+#  routes:
+#    student-service:
+#      path: /student-api/**
+#      serviceId: STUDENT-SERVICE
+#      url: http://edustudent.herokuapp.com
 
 spring:
   application:
-    name: zuul-server
+    name: gateway
+  cloud:
+    discovery:
+      enabled: true 
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+server:
+  port: 8081
 
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://edueureka.herokuapp.com/eureka/
     fetch-registry: true
-
-management:
-  security:
-    enabled: false
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 190000 # Fuse service request timeout
-
-ribbon:
-  ReadTimeout: 30000 # Timeout of request processing after connection is established 
-  ConnectTimeout: 15000 # Time-out for connection establishment
-  MaxAutoRetries: 1 # Number of retries for the current instance
-  MaxAutoRetriesNextServer: 1 # Number of retries for switching instances
-      
-zuul:
-  host:
-    connect-timeout-millis: 30000
-    socket-timeout-millis: 30000 #  sensitiveHeaders:
-  routes:
-    student-service:
-      path: /student-api/**
-      serviceId: STUDENT-SERVICE
-      url: http://edustudent.herokuapp.com
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: https://eureka.herokuapp.com/eureka/
