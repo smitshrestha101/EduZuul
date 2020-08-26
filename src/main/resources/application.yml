@@ -35,7 +35,10 @@ ribbon:
   ConnectTimeout: 15000 # Time-out for connection establishment
   MaxAutoRetries: 1 # Number of retries for the current instance
   MaxAutoRetriesNextServer: 1 # Number of retries for switching instances
-      
+  eureka:
+    enabled: false
+
+
 zuul:
   host:
     connect-timeout-millis: 30000
@@ -43,5 +46,8 @@ zuul:
   routes:
     student-service:
       path: /student-api/**
-      serviceId: STUDENT-SERVICE
-      url: http://edustudent.herokuapp.com
+      serviceId: student-service
+
+student-service:
+  ribbon:
+    listOfServers: edustudent.herokuapp.com
