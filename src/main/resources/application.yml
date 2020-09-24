@@ -1,26 +1,26 @@
 #server:
 #  port: 8765
 #
-#spring:
-#  application:
-#    name: zuul-server
-#  cloud:
-#    discovery:
-#      enabled: true 
-#    gateway:
-#      discovery:
-#        locator:
-#          enabled: true
+spring:
+  application:
+    name: zuul-server
+  cloud:
+    discovery:
+      enabled: true 
+    gateway:
+      discovery:
+        locator:
+          enabled: true
 #
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://edueureka.herokuapp.com/eureka/
-#    fetch-registry: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://edueureka.herokuapp.com/eureka/
+    fetch-registry: true
 #
-#management:
-#  security:
-#    enabled: false
+management:
+  security:
+    enabled: false
 #
 #hystrix:
 #  command:
@@ -54,11 +54,7 @@
 
 zuul:
   routes:
-    my-service:
+    student-service:
       path: /student-service/**
       serviceId: student-service
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://edueureka.herokuapp.com/eureka/
