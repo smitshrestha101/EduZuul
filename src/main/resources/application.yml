@@ -1,53 +1,64 @@
-server:
-  port: 8765
+#server:
+#  port: 8765
+#
+#spring:
+#  application:
+#    name: zuul-server
+#  cloud:
+#    discovery:
+#      enabled: true 
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://edueureka.herokuapp.com/eureka/
+#    fetch-registry: true
+#
+#management:
+#  security:
+#    enabled: false
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 190000 # Fuse service request timeout
+#
+#ribbon:
+#  ReadTimeout: 30000 # Timeout of request processing after connection is established 
+#  ConnectTimeout: 15000 # Time-out for connection establishment
+#  MaxAutoRetries: 1 # Number of retries for the current instance
+#  MaxAutoRetriesNextServer: 1 # Number of retries for switching instances
+#  eureka:
+#    enabled: false
+#
+#
+#zuul:
+#  host:
+#    connect-timeout-millis: 30000
+#    socket-timeout-millis: 30000 #  sensitiveHeaders:
+#  routes:
+#    student-service:
+#      path: /student-api/**
+#      serviceId: student-service
+#
+#student-service:
+#  ribbon:
+#    listOfServers: edustudent.herokuapp.com
 
-spring:
-  application:
-    name: zuul-server
-  cloud:
-    discovery:
-      enabled: true 
-    gateway:
-      discovery:
-        locator:
-          enabled: true
+zuul:
+  routes:
+    my-service:
+      path: /student-service/**
+      serviceId: student-service
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://edueureka.herokuapp.com/eureka/
-    fetch-registry: true
-
-management:
-  security:
-    enabled: false
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 190000 # Fuse service request timeout
-
-ribbon:
-  ReadTimeout: 30000 # Timeout of request processing after connection is established 
-  ConnectTimeout: 15000 # Time-out for connection establishment
-  MaxAutoRetries: 1 # Number of retries for the current instance
-  MaxAutoRetriesNextServer: 1 # Number of retries for switching instances
-  eureka:
-    enabled: false
-
-
-zuul:
-  host:
-    connect-timeout-millis: 30000
-    socket-timeout-millis: 30000 #  sensitiveHeaders:
-  routes:
-    student-service:
-      path: /student-api/**
-      serviceId: student-service
-
-student-service:
-  ribbon:
-    listOfServers: edustudent.herokuapp.com
